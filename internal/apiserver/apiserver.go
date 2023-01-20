@@ -12,7 +12,7 @@ type APIServer struct {
 func NewAPIServer(config *Config) *APIServer {
 	return &APIServer{
 		config: config,
-		router: gin.Default(),
+		router: gin.New(),
 	}
 }
 
@@ -24,6 +24,7 @@ func(s *APIServer) Start() {
 
 func(s *APIServer) configureRouter() {
 	s.router.Use(gin.Logger())
+	s.router.Use(headerCheck())
 	s.router.GET("/when/:year", getNumbersOfDays)
 
 }

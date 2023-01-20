@@ -1,15 +1,18 @@
 package apiserver
 
 import (
-	"github.com/gin-gonic/gin"
+	"log"
 	"strconv"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 func getNumbersOfDays(c *gin.Context) {
 	now := time.Now()
 	year, err := strconv.Atoi(c.Param("year"))
 	if err != nil {
+		log.Printf("[ERROR]: url param conversation error:%v", err)
 		c.JSON(400, gin.H{"msg": err})
 		return
 	}
